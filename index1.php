@@ -9,17 +9,29 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <style>
-*{margin: 0;
-padding: 0;}
+    * {
+        margin: 0;
+        padding: 0;
+    }
 
-table{border: solid ,black;
-text-align: center;
-}
-
-
+    table {
+        border: 2px, solid, black;
+        text-align: center;
+    }
 </style>
 
 <body>
+
+<a href="add.php" class="btn btn-success">新增學生</a>
+<a href="login.php" class="btn btn-success">教師登入</a>
+<a href="reg.php" class="btn btn-success">教師註冊</a>
+<a href="#" class="btn btn-success">Link Button</a>
+<a href="#" class="btn btn-success">Link Button</a>
+
+
+
+    <br>
+    <br>
     <h1>學生管理系統</h1>
     <?php
     $dsn = "mysql:host=localhost;charset=utf8;dbname=schoolnew";
@@ -41,16 +53,20 @@ text-align: center;
             <td>生日</td>
             <td>畢業國中</td>
             <td>年齡</td>
+            <td>操作</td>
         </tr>
         <?php
         foreach ($rows as $row) {
-            $age=round((strtotime('now')-strtotime($row['birthday']))/(60*60*24*365),1);
+            $age = round((strtotime('now') - strtotime($row['birthday'])) / (60 * 60 * 24 * 365), 1);
             echo "<tr>";
             echo "<td>{$row['school_num']}</td>";
             echo "<td>{$row['name']}</td>";
-            echo "<td>{$row[ 'birthday']}</td>";
+            echo "<td>{$row['birthday']}</td>";
             echo "<td>{$row['graduate_at']}</td>";
-            echo"<td>{$age}</td>";
+            echo "<td>{$age}</td>";
+            echo "<td><a href='edit.php?id={$row['id']}'>編輯</a></td>";
+            echo "<td><a href='del.php?id={$row['id']}'>刪除</a></td>";
+            
             echo "</tr>";
         }
         ?>
